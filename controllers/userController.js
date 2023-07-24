@@ -55,33 +55,39 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-  // // Delete a user and remove them from the course
-  // async deleteUser(req, res) {
-  //   try {
-  //     const user = await User.findOneAndRemove({ _id: req.params.userId });
+  // Update a user
+  async updateUser(req, res) {
+    try {
+      const user = await User.findOneAndUpdate(
+        { _id: req.params.userId },
+        { $set: req.body },
+        { runValidators: true, new: true }
+      );
 
-  //     if (!user) {
-  //       return res.status(404).json({ message: 'No such user exists' })
-  //     }
+      if (!user) {
+        return res.status(404).json({ message: "No user with this id!" });
+      }
 
-  //     const course = await Course.findOneAndUpdate(
-  //       { users: req.params.userId },
-  //       { $pull: { users: req.params.userId } },
-  //       { new: true }
-  //     );
+      res.json(user);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  },
+  // Delete a user and remove them from the course
+  async deleteUser(req, res) {
+    try {
+      const user = await User.findOneAndRemove({ _id: req.params.userId });
 
-  //     if (!course) {
-  //       return res.status(404).json({
-  //         message: 'User deleted, but no courses found',
-  //       });
-  //     }
+      if (!user) {
+        return res.status(404).json({ message: "No such user exists" });
+      }
 
-  //     res.json({ message: 'User successfully deleted' });
-  //   } catch (err) {
-  //     console.log(err);
-  //     res.status(500).json(err);
-  //   }
-  // },
+      res.json({ message: "User successfully deleted" });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
 
   // // Add an assignment to a user
   // async addAssignment(req, res) {
