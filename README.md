@@ -4,4 +4,4 @@ An API for a social network web application where users can share their thoughts
 
 ## Walkthrough video
 
-View video [here]().
+View video [here](https://drive.google.com/file/d/14BeHHcDioygXMmrDUt3OeBkXc3WHq2tq/view).
