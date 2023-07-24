@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types } = require("mongoose");
 
 const reactionSchema = new Schema(
   {
@@ -22,16 +22,6 @@ const reactionSchema = new Schema(
         if (date) return date.toISOString();
       },
     },
-    endDate: {
-      type: Date,
-      default: () => new Date(+new Date() + 84 * 24 * 60 * 60 * 1000),
-    },
-    students: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Student',
-      },
-    ],
   },
   {
     toJSON: {
